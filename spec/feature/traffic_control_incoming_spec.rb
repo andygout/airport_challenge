@@ -10,7 +10,7 @@ feature 'Air traffic incoming' do
   scenario 'plane can land' do
     allow(airport).to receive(:weather).and_return('sunny')
     airport.receive plane
-    expect(airport.planes.include? plane).to be true
+    expect(airport.planes).to include plane
   end
 
   scenario 'prevent planes landing when airport is full' do
@@ -26,8 +26,8 @@ feature 'Air traffic incoming' do
 
   scenario 'six planes can all land and change status to "landed"' do
     allow(airport).to receive(:weather).and_return('sunny')
-    6.times { airport.receive plane }
-    expect(airport.planes.map{ |plane| plane.status == 'landed' }.all?).to be true
+    6.times { airport.receive Plane.new }
+    expect(airport.planes.all? { |plane| plane.landed?}).to be true
   end
 
 end

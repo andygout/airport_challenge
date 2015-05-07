@@ -9,14 +9,14 @@ describe Airport do
     it 'allow a plane to land' do
       allow(subject).to receive(:weather).and_return('sunny')
       subject.receive plane
-      expect(subject.planes.include? plane).to be true
+      expect(subject.planes).to include plane
     end
 
     it 'allow a plane to take off' do
       allow(subject).to receive(:weather).and_return('sunny')
       subject.receive plane
       subject.launch plane
-      expect(subject.planes.include? plane).to be false
+      expect(subject.planes).to_not include plane
     end
 
   end
@@ -47,11 +47,7 @@ describe Airport do
 
   context 'airport capacity' do
 
-    it 'airports commission instructs amend to airport capacity' do
-      expect(subject.capacity = 50).to eq 50
-    end
-
-    it 'airports commission cannot set capacity to lower than number of planes in airport' do
+    it 'cannot be set to lower than number of planes in airport' do
       allow(subject).to receive(:weather).and_return('sunny')
       2.times { subject.receive plane }
       expect { subject.capacity = 1 }.to raise_error 'capacity cannot be lower than number of planes'

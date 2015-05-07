@@ -7,11 +7,13 @@ describe Plane do
   end
 
   it 'changes its status to landed after landing' do
-    expect(subject.land).to eq 'landed'
+    subject.land
+    expect(subject.status).to eq 'landed'
   end
 
   it 'changes its status to flying after taking off' do
-    expect(subject.takeoff).to eq 'flying'
+    subject.takeoff
+    expect(subject.status).to eq 'flying'
   end
 
 end

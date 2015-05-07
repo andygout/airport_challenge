@@ -11,7 +11,7 @@ feature 'Air traffic outgoing' do
     allow(airport).to receive(:weather).and_return('sunny')
     airport.receive plane
     airport.launch plane
-    expect(airport.planes.include? plane).to be false
+    expect(airport.planes).to_not include plane
   end
 
   scenario 'a plane cannot take off when there is a storm brewing' do
@@ -24,7 +24,7 @@ feature 'Air traffic outgoing' do
     6.times { airport.receive plane }
     launched = []
     airport.planes.each { |plane| launched << (airport.launch plane) }
-    expect(launched.map{ |plane| plane.status == 'flying' }.all?).to be true
+    expect(launched.all? { |plane| plane.flying?}).to be true
   end
 
 end

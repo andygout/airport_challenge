@@ -6,12 +6,7 @@ class WeatherSpec
 
     it 'weather status will read either sunny or stormy' do
       weather_states = ['sunny', 'stormy']
-      expect(weather_states.include? subject.weather).to be true
-    end
-
-    it 'request for weather update will read either sunny or stormy' do
-      weather_states = ['sunny', 'stormy']
-      expect(weather_states.include? subject.weather).to be true
+      expect(weather_states).to include subject.weather
     end
 
   end
